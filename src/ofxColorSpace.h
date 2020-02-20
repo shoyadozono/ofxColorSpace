@@ -38,23 +38,23 @@ namespace ofxColorSpace {
 
 		std::vector<ofFloatColor> gradient;
 
-		if (num <= 1) {
-			ofLogWarning() << "gradient num should be greater than 1";
-			return gradient;
-		}
+        if (num <= 1) {
+            ofLogWarning() << "gradient num should be greater than 1";
+            return gradient;
+        }
 
-		float step = 1. / float(num - 1);
+        float step = 1. / float(num - 1);
 
-		for (int i = 0; i < num; i++) {
-			
-			vec3 c = mix(t1.getComponent(), t2.getComponent(), step * i);
-			T t(c.x, c.y, c.z);
-			Rgb rgb;
-			t.To<Rgb>(&rgb);
+        for (int i = 0; i < num; i++) {
 
-			gradient.push_back(ofFloatColor(rgb.r, rgb.g, rgb.b));
+            vec3 c = mix(t1.getComponent(), t2.getComponent(), step * i);
+            T t(c.x, c.y, c.z);
+            Rgb rgb;
+            t.template To<Rgb>(&rgb);
 
-		}
+            gradient.push_back(ofFloatColor(rgb.r, rgb.g, rgb.b));
+
+        }
 
 		return gradient;
 
